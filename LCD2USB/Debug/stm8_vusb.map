@@ -1,0 +1,570 @@
+
+Map of Debug\stm8_vusb.sm8 from link file Debug\stm8_vusb.lkf - Tue Aug 18 11:48:12 2020
+
+
+                               --------
+                               Segments
+                               --------
+
+start 00008080 end 0000819b length   283 segment .utext
+start 0000819b end 00008266 length   203 segment .const
+start 0000827a end 00008e84 length  3082 segment .text
+start 00004000 end 00004000 length     0 segment .eeprom
+start 00000000 end 0000000c length    12 segment .bsct, initialized
+start 0000826e end 0000827a length    12 segment .bsct, from
+start 0000000c end 00000077 length   107 segment .ubsct
+start 00000077 end 00000077 length     0 segment .bit
+start 00000077 end 00000077 length     0 segment .share
+start 00000100 end 00000100 length     0 segment .data
+start 00000100 end 00000100 length     0 segment .bss
+start 00000000 end 000006ed length  1773 segment .info.
+start 00000000 end 00002f48 length 12104 segment .debug
+start 00008000 end 00008080 length   128 segment .const
+start 00008266 end 0000826e length     8 segment .init
+
+
+                               -------
+                               Modules
+                               -------
+
+C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8:
+start 0000827a end 000082ca length    80 section .text
+start 00000100 end 00000100 length     0 section .bss
+start 0000000c end 0000000c length     0 section .ubsct
+start 00000000 end 00000034 length    52 section .info.
+
+Debug\stm8s_flash.o:
+start 00000000 end 00000ddf length  3551 section .debug
+start 00000034 end 000000d8 length   164 section .info.
+start 000082ca end 000082e0 length    22 section .text
+start 000082e0 end 000082e7 length     7 section .text
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start 000082e7 end 0000830b length    36 section .text
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+
+Debug\usb.o:
+start 00000000 end 00000004 length     4 section .bsct
+start 0000000c end 0000006a length    94 section .ubsct
+start 00000ddf end 00001af7 length  3352 section .debug
+start 000000d8 end 00000174 length   156 section .info.
+start 0000830b end 00008336 length    43 section .text
+start 00008336 end 00008371 length    59 section .text
+start 00008371 end 00008376 length     5 section .text
+start 00008376 end 0000837f length     9 section .text
+start 0000819b end 000081a3 length     8 section .const
+start 0000837f end 000084db length   348 section .text
+start 000084db end 0000853c length    97 section .text
+start 0000853c end 000086a0 length   356 section .text
+start 000086a0 end 000086bd length    29 section .text
+start 000086bd end 0000873f length   130 section .text
+start 0000873f end 000088e9 length   426 section .text
+start 000088e9 end 00008943 length    90 section .text
+start 00008943 end 000089b5 length   114 section .text
+start 000089b5 end 00008a17 length    98 section .text
+
+Debug\usb_rx.o:
+start 00001af7 end 00001bf8 length   257 section .debug
+start 00000174 end 000001ac length    56 section .info.
+start 00008080 end 0000819b length   283 section .utext
+
+Debug\usb_tx.o:
+start 00008a17 end 00008b42 length   299 section .text
+start 00001bf8 end 00001e5d length   613 section .debug
+start 000001ac end 000001e4 length    56 section .info.
+
+Debug\usb_desc.o:
+start 00000004 end 0000000c length     8 section .bsct
+start 00001e5d end 0000204a length   493 section .debug
+start 000001e4 end 00000285 length   161 section .info.
+start 000081a3 end 00008226 length   131 section .const
+
+Debug\hardware.o:
+start 0000006a end 0000006d length     3 section .ubsct
+start 0000204a end 00002412 length   968 section .debug
+start 00000285 end 00000326 length   161 section .info.
+start 00008b42 end 00008b5f length    29 section .text
+start 00008b5f end 00008b65 length     6 section .text
+start 00008b65 end 00008c21 length   188 section .text
+start 00008c21 end 00008c36 length    21 section .text
+start 00008c36 end 00008c3f length     9 section .text
+start 00008c3f end 00008c5f length    32 section .text
+start 00008c5f end 00008c70 length    17 section .text
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+
+Debug\lcd.o:
+start 0000006d end 0000006f length     2 section .ubsct
+start 00002412 end 00002970 length  1374 section .debug
+start 00000326 end 000003c2 length   156 section .info.
+start 00008c70 end 00008c77 length     7 section .text
+start 00008c77 end 00008c9b length    36 section .text
+start 00008c9b end 00008cbc length    33 section .text
+start 00008cbc end 00008cf2 length    54 section .text
+start 00008cf2 end 00008cfe length    12 section .text
+start 00008cfe end 00008d0d length    15 section .text
+start 00008d0d end 00008d1c length    15 section .text
+start 00008d1c end 00008d26 length    10 section .text
+start 00008d26 end 00008d5b length    53 section .text
+start 00008d5b end 00008d63 length     8 section .text
+start ******** end ******** length     0 section .text *** removed ***
+start ******** end ******** length     0 section .text *** removed ***
+start 00008226 end 00008266 length    64 section .const
+start 00008d63 end 00008d83 length    32 section .text
+start ******** end ******** length     0 section .text *** removed ***
+
+Debug\main.o:
+start 0000006f end 00000071 length     2 section .ubsct
+start 00002970 end 00002e05 length  1173 section .debug
+start 000003c2 end 0000045f length   157 section .info.
+start 00008d83 end 00008d84 length     1 section .text
+start 00008d84 end 00008d86 length     2 section .text
+start 00008d86 end 00008d88 length     2 section .text
+start 00008d88 end 00008e60 length   216 section .text
+start 00008e60 end 00008e61 length     1 section .text
+start 00008e61 end 00008e83 length    34 section .text
+
+(C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)cmulx.o:
+start ******** end ******** length     0 section .text *** removed ***
+start 0000045f end 0000048f length    48 section .info.
+
+(C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ladd.o:
+start ******** end ******** length     0 section .text *** removed ***
+start 0000048f end 000004be length    47 section .info.
+
+(C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgadd.o:
+start ******** end ******** length     0 section .text *** removed ***
+start 000004be end 000004ee length    48 section .info.
+
+(C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lreg.o:
+start ******** end ******** length     0 section .ubsct *** removed ***
+start 000004ee end 0000051d length    47 section .info.
+
+(C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ltor.o:
+start ******** end ******** length     0 section .text *** removed ***
+start 0000051d end 0000054c length    47 section .info.
+
+(C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)rtol.o:
+start ******** end ******** length     0 section .text *** removed ***
+start 0000054c end 0000057b length    47 section .info.
+
+(C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)umul.o:
+start ******** end ******** length     0 section .text *** removed ***
+start 0000057b end 000005aa length    47 section .info.
+
+(C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)xreg.o:
+start 00000071 end 00000074 length     3 section .ubsct
+start 000005aa end 000005d9 length    47 section .info.
+
+(C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)yreg.o:
+start 00000074 end 00000077 length     3 section .ubsct
+start 000005d9 end 00000608 length    47 section .info.
+
+Debug\stm8_interrupt_vector.o:
+start 00002e05 end 00002f48 length   323 section .debug
+start 00000608 end 000006b6 length   174 section .info.
+start 00008e83 end 00008e84 length     1 section .text
+start 00008000 end 00008080 length   128 section .const
+
+
+                             -----------
+                             Stack usage
+                             -----------
+
+Debug\hardware.o:
+_Check_OPTION_BYTE                12   (7)
+_Delay                             6   (4)
+_Init_Hardware                    23   (2)
+_LCD_Init                         21   (2)
+_RESET_CHIP                        2   (2)
+_TIM2_Init                         2   (2)
+f_TIM2_Update_IRQ             >    6   (6)
+
+Debug\lcd.o:
+_LCD_Cls                          16   (2)
+_LCD_Cmd                          14   (3)
+_LCD_Contrast                      2   (2)
+_LCD_Data                         14   (3)
+_LCD_RD                            9   (3)
+_LCD_SetMode                      19   (2)
+_LCD_Short_Delay                   2   (2)
+_LCD_UserCh                       17   (3)
+_LCD_WR                           11   (3)
+_LCD_WR_High_Nibble                8   (2)
+_LCD_Wait                         11   (2)
+
+Debug\main.o:
+_USB_Class_DeInit_callback         2   (2)
+_USB_Class_Init_callback           2   (2)
+_USB_EP0_RxReady_callback          5   (5)
+_USB_EP1_RxReady_callback          3   (3)
+_USB_Setup_Request_callback       28   (9)
+_main                         >   47   (3)
+
+Debug\stm8_interrupt_vector.o:
+f_Default_IRQ_Handler         >    6   (6)
+
+Debug\stm8s_flash.o:
+_FLASH_Lock                        2   (2)
+_FLASH_Unlock                      2   (2)
+_FLASH_WaitForLastOperation        5   (5)
+
+Debug\usb.o:
+_USB_Device_Request               36   (8)
+_USB_Handle_Standard_Request      40   (4)
+_USB_Init                          6   (2)
+_USB_NRZI_RX_Decode               12   (12)
+_USB_Reset                         4   (2)
+_USB_Send_Data                    19   (10)
+_USB_Send_STALL                    3   (3)
+_USB_connect                       2   (2)
+_USB_disconnect                    2   (2)
+_USB_loop                         44   (4)
+_USB_slow_loop                     6   (2)
+_usb_calc_crc16                    9   (9)
+_usb_rx_ok                    >    4   (4)
+
+Stack size: 53
+
+
+                              ---------
+                              Call tree
+                              ---------
+   1 > _ll_usb_rx: (0)
+
+   2 > _main: (3)
+   3      + _Init_Hardware: (2)
+   4      |    + _Check_OPTION_BYTE: (7)
+   5      |    |    + _FLASH_Lock: (2)
+   6      |    |    + _FLASH_Unlock: (2)
+   7      |    |    + _FLASH_WaitForLastOperation: (5)
+   8      |    |    + _RESET_CHIP: (2)
+          |    | 
+   9      |    + _Delay: (4)
+  10      |    |    + _LCD_Short_Delay: (2)
+          |    | 
+  11      |    + _LCD_Init: (2)
+  12      |    |    + _LCD_Contrast: (2)
+  13      |    |    + _LCD_SetMode: (2)
+  14      |    |    |    + _Delay --> 9
+  15      |    |    |    + _LCD_Cls: (2)
+  16      |    |    |    |    + _LCD_Cmd: (3)
+  17      |    |    |    |    |    + _LCD_WR: (3)
+  18      |    |    |    |    |    |    + _LCD_Short_Delay --> 10
+  19      |    |    |    |    |    |    + _LCD_WR_High_Nibble: (2)
+  20      |    |    |    |    |    |    |    + _Delay --> 9
+  21      |    |    |    |    |    |    |    + _LCD_Short_Delay --> 10
+          |    |    |    |    |    |    | 
+          |    |    |    |    |    | 
+  22      |    |    |    |    |    + _LCD_Wait: (2)
+  23      |    |    |    |    |    |    + _LCD_RD: (3)
+  24      |    |    |    |    |    |    |    + _Delay --> 9
+  25      |    |    |    |    |    |    |    + _LCD_Short_Delay --> 10
+          |    |    |    |    |    |    | 
+          |    |    |    |    |    | 
+          |    |    |    |    | 
+          |    |    |    | 
+  26      |    |    |    + _LCD_Cmd --> 16
+  27      |    |    |    + _LCD_UserCh: (3)
+  28      |    |    |    |    + _LCD_Cmd --> 16
+  29      |    |    |    |    + _LCD_Data: (3)
+  30      |    |    |    |    |    + _LCD_WR --> 17
+  31      |    |    |    |    |    + _LCD_Wait --> 22
+          |    |    |    |    | 
+          |    |    |    | 
+  32      |    |    |    + _LCD_WR_High_Nibble --> 19
+          |    |    | 
+          |    | 
+  33      |    + _TIM2_Init: (2)
+  34      |    + _USB_Init: (2)
+  35      |    |    + _USB_Reset: (2)
+  36      |    |    |    + _USB_Class_DeInit_callback: (2)
+          |    |    | 
+          |    | 
+  37      |    + _USB_connect: (2)
+  38      |    + _USB_disconnect: (2)
+          | 
+  39      + _USB_loop: (4)
+  40      |    + _USB_EP0_RxReady_callback: (5)
+  41      |    + _USB_EP1_RxReady_callback: (3)
+  42      |    + _USB_Handle_Standard_Request: (4)
+  43      |    |    + _USB_Device_Request: (8)
+  44      |    |    |    + _USB_Class_DeInit_callback --> 36
+  45      |    |    |    + _USB_Class_Init_callback: (2)
+  46      |    |    |    + _USB_Send_Data: (10)
+  47      |    |    |    |    + _usb_calc_crc16: (9)
+          |    |    |    | 
+  48      |    |    |    + _USB_Send_STALL: (3)
+  49      |    |    |    + _USB_Setup_Request_callback: (9)
+  50      |    |    |    |    + _LCD_Cmd --> 16
+  51      |    |    |    |    + _LCD_Contrast --> 12
+  52      |    |    |    |    + _LCD_Data --> 29
+  53      |    |    |    |    + _USB_Send_Data --> 46
+          |    |    |    | 
+          |    |    | 
+  54      |    |    + _USB_Send_Data --> 46
+  55      |    |    + _USB_Send_STALL --> 48
+  56      |    |    + _USB_Setup_Request_callback --> 49
+          |    | 
+  57      |    + _USB_NRZI_RX_Decode: (12)
+  58      |    + _USB_Reset --> 35
+  59      |    + _USB_Setup_Request_callback --> 49
+          | 
+  60      + _USB_slow_loop: (2)
+  61      |    + _FLASH_Unlock --> 6
+  62      |    + _USB_Reset --> 35
+  63      |    + _USB_connect --> 37
+  64      |    + _USB_disconnect --> 38
+          | 
+       
+  65 > _usb_rx_ok: (4)
+
+  66 > f_Default_IRQ_Handler: (6)
+
+  67 > f_TIM2_Update_IRQ: (6)
+
+  68   _Check_OPTION_BYTE --> 4
+
+  69   _Delay --> 9
+
+  70   _FLASH_Lock --> 5
+
+  71   _FLASH_Unlock --> 6
+
+  72   _FLASH_WaitForLastOperation --> 7
+
+  73   _Init_Hardware --> 3
+
+  74   _LCD_Cls --> 15
+
+  75   _LCD_Cmd --> 16
+
+  76   _LCD_Contrast --> 12
+
+  77   _LCD_Data --> 29
+
+  78   _LCD_Init --> 11
+
+  79   _LCD_RD --> 23
+
+  80   _LCD_SetMode --> 13
+
+  81   _LCD_Short_Delay --> 10
+
+  82   _LCD_UserCh --> 27
+
+  83   _LCD_WR --> 17
+
+  84   _LCD_WR_High_Nibble --> 19
+
+  85   _LCD_Wait --> 22
+
+  86   _RESET_CHIP --> 8
+
+  87   _TIM2_Init --> 33
+
+  88   _USB_Class_DeInit_callback --> 36
+
+  89   _USB_Class_Init_callback --> 45
+
+  90   _USB_Device_Request --> 43
+
+  91   _USB_EP0_RxReady_callback --> 40
+
+  92   _USB_EP1_RxReady_callback --> 41
+
+  93   _USB_Handle_Standard_Request --> 42
+
+  94   _USB_Init --> 34
+
+  95   _USB_NRZI_RX_Decode --> 57
+
+  96   _USB_Reset --> 35
+
+  97   _USB_Send_Data --> 46
+
+  98   _USB_Send_STALL --> 48
+
+  99   _USB_Setup_Request_callback --> 49
+
+ 100   _USB_connect --> 37
+
+ 101   _USB_disconnect --> 38
+
+ 102   _USB_loop --> 39
+
+ 103   _USB_slow_loop --> 60
+
+ 104   _usb_calc_crc16 --> 47
+
+
+
+                               -------
+                               Symbols
+                               -------
+
+_Check_OPTION_BYTE               00008b65   defined in Debug\hardware.o section .text
+_Delay                           00008c5f   defined in Debug\hardware.o section .text
+                                            used in Debug\lcd.o
+_FLASH_DeInit                    ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_EraseBlock                ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_EraseByte                 ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_EraseOptionByte           ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_GetBootSize               ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_GetFlagStatus             ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_GetLowPowerMode           ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_GetProgrammingTime        ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_ITConfig                  ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_Lock                      000082e0   defined in Debug\stm8s_flash.o section .text
+                                            used in Debug\hardware.o
+_FLASH_ProgramBlock              ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_ProgramByte               ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_ProgramOptionByte         ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_ProgramWord               ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_ReadByte                  ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_ReadOptionByte            ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_SetLowPowerMode           ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_SetProgrammingTime        ********   *** removed from Debug\stm8s_flash.o ***
+_FLASH_Unlock                    000082ca   defined in Debug\stm8s_flash.o section .text
+                                            used in Debug\usb.o Debug\hardware.o
+_FLASH_WaitForLastOperation      000082e7   defined in Debug\stm8s_flash.o section .text
+                                            used in Debug\hardware.o
+_Init_Hardware                   00008b42   defined in Debug\hardware.o section .text
+                                            used in Debug\main.o
+_KeyScan                         ********   *** removed from Debug\hardware.o ***
+_Key_Get                         ********   *** removed from Debug\hardware.o ***
+_LCD_CG                          00008226   defined in Debug\lcd.o section .const
+_LCD_Ch                          ********   *** removed from Debug\lcd.o ***
+_LCD_Cls                         00008d1c   defined in Debug\lcd.o section .text
+_LCD_Cmd                         00008d0d   defined in Debug\lcd.o section .text
+                                            used in Debug\main.o
+_LCD_Contrast                    00008d5b   defined in Debug\lcd.o section .text
+                                            used in Debug\hardware.o Debug\main.o
+_LCD_Data                        00008cfe   defined in Debug\lcd.o section .text
+                                            used in Debug\main.o
+_LCD_Init                        00008c3f   defined in Debug\hardware.o section .text
+_LCD_Moveto                      ********   *** removed from Debug\lcd.o ***
+_LCD_Puts                        ********   *** removed from Debug\lcd.o ***
+_LCD_RD                          00008cbc   defined in Debug\lcd.o section .text
+_LCD_SetMode                     00008d26   defined in Debug\lcd.o section .text
+                                            used in Debug\hardware.o
+_LCD_Short_Delay                 00008c70   defined in Debug\lcd.o section .text
+                                            used in Debug\hardware.o
+_LCD_UserCh                      00008d63   defined in Debug\lcd.o section .text
+_LCD_WR                          00008c9b   defined in Debug\lcd.o section .text
+_LCD_WR_High_Nibble              00008c77   defined in Debug\lcd.o section .text
+_LCD_Wait                        00008cf2   defined in Debug\lcd.o section .text
+_LCD_X                           0000006e   defined in Debug\lcd.o section .ubsct
+_LCD_Y                           0000006d   defined in Debug\lcd.o section .ubsct
+_RESET_CHIP                      00008b5f   defined in Debug\hardware.o section .text
+_String_LangID                   000081ce   defined in Debug\usb_desc.o section .const
+_String_Product                  000081ec   defined in Debug\usb_desc.o section .const
+_String_Serial                   00008210   defined in Debug\usb_desc.o section .const
+_String_Vendor                   000081d2   defined in Debug\usb_desc.o section .const
+_TIM2_Init                       00008c21   defined in Debug\hardware.o section .text
+_TIM2_Update_Flag                0000006c   defined in Debug\hardware.o section .ubsct
+                                            used in Debug\main.o
+_USB_Class_DeInit_callback       00008d86   defined in Debug\main.o section .text
+                                            used in Debug\usb.o
+_USB_Class_Init_callback         00008d84   defined in Debug\main.o section .text
+                                            used in Debug\usb.o
+_USB_Device_Request              0000873f   defined in Debug\usb.o section .text
+_USB_EP0_RxReady_callback        00008d83   defined in Debug\main.o section .text
+                                            used in Debug\usb.o
+_USB_EP1_RxReady_callback        00008e60   defined in Debug\main.o section .text
+                                            used in Debug\usb.o
+_USB_Handle_Standard_Request     000088e9   defined in Debug\usb.o section .text
+_USB_Init                        00008336   defined in Debug\usb.o section .text
+                                            used in Debug\hardware.o
+_USB_NRZI_RX_Decode              000086bd   defined in Debug\usb.o section .text
+_USB_Reset                       0000830b   defined in Debug\usb.o section .text
+_USB_Send_Data                   0000853c   defined in Debug\usb.o section .text
+                                            used in Debug\main.o
+_USB_Send_STALL                  000086a0   defined in Debug\usb.o section .text
+_USB_Setup_Request_callback      00008d88   defined in Debug\main.o section .text
+                                            used in Debug\usb.o
+_USB_String_Descriptors          00000004   defined in Debug\usb_desc.o section .bsct, initialized
+                                            used in Debug\usb.o
+_USB_String_Descriptors_Length   00008222   defined in Debug\usb_desc.o section .const
+                                            used in Debug\usb.o
+_USB_connect                     00008371   defined in Debug\usb.o section .text
+                                            used in Debug\hardware.o
+_USB_disconnect                  00008376   defined in Debug\usb.o section .text
+                                            used in Debug\hardware.o
+_USB_loop                        00008943   defined in Debug\usb.o section .text
+                                            used in Debug\main.o
+_USB_slow_loop                   000089b5   defined in Debug\usb.o section .text
+                                            used in Debug\main.o
+__endmem                         000001ff   defined in command file
+                                            *** not used ***
+__endzp                          00000077   defined in command file section .ubsct
+                                            used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
+__idesc__                        00008266   defined in linker section .init
+                                            used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
+__memory                         00000100   defined in command file section .bss
+                                            used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
+__stack                          000003ff   defined in command file
+                                            used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
+__startmem                       00000100   defined in command file section .bss
+                                            *** not used ***
+__stext                          0000827a   defined in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8 section .text
+                                            used in Debug\stm8_interrupt_vector.o
+__vectab                         00008000   defined in Debug\stm8_interrupt_vector.o section .const
+_exit                            000082c8   defined in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8 section .text
+_key                             0000006a   defined in Debug\hardware.o section .ubsct
+_ll_usb_rx                       00008149   defined in Debug\usb_rx.o section .utext
+                                            used in Debug\stm8_interrupt_vector.o
+_ll_usb_rx_buffer                0000005a   defined in Debug\usb.o section .ubsct
+                                            used in Debug\usb_rx.o
+_ll_usb_rx_count                 00000056   defined in Debug\usb.o section .ubsct
+                                            used in Debug\usb_rx.o
+_ll_usb_tx                       00008b34   defined in Debug\usb_tx.o section .text
+                                            used in Debug\usb.o
+_ll_usb_tx_buffer_pointer        00000058   defined in Debug\usb.o section .ubsct
+                                            used in Debug\usb_tx.o
+_ll_usb_tx_count                 00000057   defined in Debug\usb.o section .ubsct
+                                            used in Debug\usb_tx.o
+_main                            00008e61   defined in Debug\main.o section .text
+                                            used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
+_p_HSI_TRIMING_DONE              00000002   defined in Debug\usb.o section .bsct, initialized
+_p_HSI_TRIM_VAL                  00000000   defined in Debug\usb.o section .bsct, initialized
+_replyBuf                        0000006f   defined in Debug\main.o section .ubsct
+_usb                             0000000c   defined in Debug\usb.o section .ubsct
+_usb_calc_crc16                  000084db   defined in Debug\usb.o section .text
+_usb_configuration_descriptor    000081b5   defined in Debug\usb_desc.o section .const
+                                            used in Debug\usb.o
+_usb_device_descriptor           000081a3   defined in Debug\usb_desc.o section .const
+                                            used in Debug\usb.o
+_usb_rx_ok                       0000837f   defined in Debug\usb.o section .text
+                                            used in Debug\usb_rx.o
+c_cmulx                          ********   *** removed from (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)cmulx.o ***
+c_ladd                           ********   *** removed from (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ladd.o ***
+c_lgadd                          ********   *** removed from (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lgadd.o ***
+c_lreg                           ********   *** removed from (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)lreg.o ***
+c_ltor                           ********   *** removed from (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)ltor.o ***
+c_rtol                           ********   *** removed from (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)rtol.o ***
+c_umul                           ********   *** removed from (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)umul.o ***
+c_x                              00000071   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)xreg.o section .ubsct
+                                            used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
+                                                    Debug\usb.o
+                                                    (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)umul.o
+c_y                              00000074   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)yreg.o section .ubsct
+                                            used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8
+                                                    (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8)umul.o
+f_Default_IRQ_Handler            00008e83   defined in Debug\stm8_interrupt_vector.o section .text
+f_TIM2_Update_IRQ                00008c36   defined in Debug\hardware.o section .text
+                                            used in Debug\stm8_interrupt_vector.o
