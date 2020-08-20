@@ -27,8 +27,6 @@ LCD Smarties at http://lcdsmartie.sourceforge.net/
 - The PCB is a general purpose single sided PCB. Serial port, I2C are broken out to headers, pads for tiny crystal and load capacitors available for oscillator. 
 The buttons are also used as jumpers for Gnd.  Install 2 jumpers under buttons S1 and S2 if they are not used.  LCD mounting holes and pinouts are for common 1602A from China.
 
-- Not sure if the buttons (S1 & S3) are working correctly. LCD2USB.dll for LCD Smarties does not seem to access them directly. I don't know LCD Smarties enough.  The AVR firmware doesn't debunce them.
-
 Note: 
 
 The USB stack calibrates the HSI clock while connected to the PC. The calibration is store in EEPROM. It can take a couple of minutes the first time before it functions correctly.
@@ -36,4 +34,20 @@ The USB stack calibrates the HSI clock while connected to the PC. The calibratio
 Timer 1 is used by the USB stack for filtering and interrupt. It is not actually used for counting.
 
 R7 value control brightness.  I use R7 = 330R for my green display and 2.7K for my white ones.
+
+Changes:
+
+- New STM8_LCD2USB.dll for 3 buttons support. I took a bit of effort for me to learn to compile a .DLL, so I have included source + solution file for vs_Community (Visual Studio Community 2019
+Version 16.7.2) with C++ (2019).  I am using libusb-win32-bin-1.2.7.1.zip to create this.
+
+- Buttons: return by $MObutton
+
+  * Long press 'OR' 0x10 to the individual keys values.
+
+  * Multiple keys pressed at the same time have their values 'OR' together
+
+Action|Menu (S1)| Inc (S2)|Dec (S3)
+------|---------|---------|--------
+Quick press|1|4|2
+Long Press|A|D|B
 

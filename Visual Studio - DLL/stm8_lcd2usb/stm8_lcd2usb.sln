@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lcd2usb", "lcd2usb\lcd2usb.vcxproj", "{34CB0D8E-466A-4D1E-80E8-71C09C6B706B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34CB0D8E-466A-4D1E-80E8-71C09C6B706B}.Debug|x64.ActiveCfg = Debug|x64
+		{34CB0D8E-466A-4D1E-80E8-71C09C6B706B}.Debug|x64.Build.0 = Debug|x64
+		{34CB0D8E-466A-4D1E-80E8-71C09C6B706B}.Debug|x86.ActiveCfg = Debug|Win32
+		{34CB0D8E-466A-4D1E-80E8-71C09C6B706B}.Debug|x86.Build.0 = Debug|Win32
+		{34CB0D8E-466A-4D1E-80E8-71C09C6B706B}.Release|x64.ActiveCfg = Release|x64
+		{34CB0D8E-466A-4D1E-80E8-71C09C6B706B}.Release|x64.Build.0 = Release|x64
+		{34CB0D8E-466A-4D1E-80E8-71C09C6B706B}.Release|x86.ActiveCfg = Release|Win32
+		{34CB0D8E-466A-4D1E-80E8-71C09C6B706B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0A6B89E-D851-4E83-BC4B-1656030301C7}
+	EndGlobalSection
+EndGlobal
