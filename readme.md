@@ -1,4 +1,4 @@
-#STM8-LCDUSB
+#STM8-LCD2USB
 
 The firmware only USB stack is an unofficial fork from STM8S-VUSB-KEYBOARD at https://github.com/BBS215/STM8S-VUSB-KEYBOARD
 
