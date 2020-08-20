@@ -150,6 +150,9 @@ void LCD_Init(void)
 	// PC2: TIM1_CH3: fake output port by using PWM mode
 	TIM1->BKR |= TIM1_BKR_MOE;						// Main output enable
 	TIM1->CCER2 |= TIM1_CCER2_CC3E|TIM1_CCER2_CC4E;	// CH3, CH4 output enable
+	
+	LCD_DATA_PORT->CR1 |= LCD_DATA;				// Set push-pull/pull up
+	
 	LCD_Contrast(LCD_DEFAULT_CONTRAST);
 	LCD_SetMode();
 }
@@ -163,7 +166,7 @@ void Delay(uint16_t t)
 
 void KeyScan(void)
 {
-	uint8_t new_code = (uint8_t)((~(LCD_DATA_PORT->IDR)>>LCD_DOFFSET)&KEY_MASK);
+	uint8_t new_code = (uint8_t)((~(LCD_DATA_PORT->IDR)>>KEY_DOFFSET)&KEY_MASK);
 
 	if(new_code==(key.code & KEY_MASK))
 	{

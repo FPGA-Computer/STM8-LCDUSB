@@ -26,8 +26,8 @@
 
 typedef struct
 {
-  unsigned char irq;
-  void @far (*irq_handler)(void);
+	unsigned char irq;
+	void @far (*irq_handler)(void);
 } irq_vectors;
 
 extern void _stext();
@@ -37,8 +37,8 @@ extern void _stext();
 
 const irq_vectors _vectab[] =
 {
-  {0x82,(void @far (*)(void))_stext}, /* reset */
-  {0x82,TRAP},   // trap
+	{0x82,(void @far (*)(void))_stext}, /* reset */
+	{0x82,TRAP},   // trap
   {0x82,IRQ0},   // irq0
   {0x82,IRQ1},   // irq1
   {0x82,IRQ2},   // irq2

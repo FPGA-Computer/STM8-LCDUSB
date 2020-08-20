@@ -78,7 +78,7 @@ enum _OPT2 { AFR0 = 0x01, AFR1=0x02, AFR2=0x04, AFR3=0x08, AFR4=0x10, AFR5=0x20,
 #define LCD_DATA_PORT		GPIOD
 #define LCD_DATA				(PD4|PD3|PD2|PD1)
 #define LCD_DOFFSET			1
-#define KEY_DOFFSET			2
+#define KEY_DOFFSET			(LCD_DOFFSET+1)
 
 extern volatile uint8_t TIM2_Update_Flag;
 

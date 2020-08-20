@@ -94,8 +94,8 @@ int8_t USB_Setup_Request_callback(t_USB_SetupReq *p_req)
 					break;
 		
 				case 1: // keys
-					//replyBuf[0] = Key_Get();
-					replyBuf[0] = (uint8_t)((~(LCD_DATA_PORT->IDR)>>LCD_DOFFSET)&KEY_MASK);
+					replyBuf[0] = Key_Get();
+					//replyBuf[0] = (uint8_t)((~(LCD_DATA_PORT->IDR)>>KEY_DOFFSET)&KEY_MASK);
 					replyBuf[1] = 0;
 					break;
 		
@@ -148,7 +148,7 @@ void main(void)
 			{ // 100 Hz call
 				counter = TIM2_CNTMAX;
 				USB_slow_loop(); // "slow" USB loop for setting HSI generator and EP1 watchdog
-//				KeyScan();
+				KeyScan();
 			}
 		}
 	}

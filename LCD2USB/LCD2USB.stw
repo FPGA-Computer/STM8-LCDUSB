@@ -6,3 +6,7 @@ Keyword=ST7Workspace-V0.7
 [Project0]
 Filename=stm8_vusb.stp
 Dependencies=
+[Options]
+ActiveProject=stm8_vusb
+ActiveConfig=Debug
+AddSortedElements=0
