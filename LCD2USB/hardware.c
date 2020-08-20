@@ -199,7 +199,7 @@ uint8_t Key_Get(void)
 { 
   if(key.code & KEY_FLAG)
 	{
-		key.code = (uint8_t)(key.code & ~KEY_FLAG)|KEY_REPORTED;
+		key.code = (uint8_t)((key.code & ~KEY_FLAG)|KEY_REPORTED);
 		return(uint8_t)(key.code & (KEY_MASK|KEY_LONG));
 	}
 	return(0);

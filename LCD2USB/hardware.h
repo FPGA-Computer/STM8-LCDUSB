@@ -54,7 +54,7 @@ enum _OPT2 { AFR0 = 0x01, AFR1=0x02, AFR2=0x04, AFR3=0x08, AFR4=0x10, AFR5=0x20,
 #define TIM2_PRSC				4
 #define TIM2_FREQ				400
 #define TIM2_Slow				100
-#define TIM2_CNTMAX			4
+#define TIM2_CNTMAX			(TIM2_FREQ/TIM2_Slow)
 #define TIM2_RELOAD			(CPU_CLOCK/(1<<TIM2_PRSC)/TIM2_FREQ)
 
 // fake output for PC[5..3]
@@ -108,12 +108,13 @@ extern key_t key;
 void KeyScan(void);
 
 #define KEY_REPEAT_RATE		4
-#define KEY_THRESHOLD			2
-#define KEY_RELOAD				50
-#define KEY_CNT_MAX				(KEY_RELOAD+TIM2_FREQ/TIM2_CNTMAX/2/KEY_REPEAT_RATE)
+#define KEY_THRESHOLD			3
+#define KEY_REPEAT_WAIT		0.75
 
+#define KEY_CNT_MAX				(KEY_REPEAT_WAIT*TIM2_Slow+KEY_THRESHOLD)
+#define KEY_RELOAD				(KEY_CNT_MAX-TIM2_Slow/KEY_REPEAT_RATE)
 
 enum keys { KEY_MENU=0x01, KEY_DEC=0x02, KEY_INC=0x04, KEY_MASK= KEY_MENU|KEY_DEC|KEY_INC, 
-						KEY_LONG=0x20, KEY_REPORTED=0x40, KEY_FLAG=0x80 };
+						KEY_LONG=0x10, KEY_REPORTED=0x40, KEY_FLAG=0x80 };
 						
 #endif
