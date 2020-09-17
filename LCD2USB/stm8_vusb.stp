@@ -311,7 +311,7 @@ PathName=lib\src\stm8s_flash.c
 ElemType=Folder
 PathName=Source Files\USB
 Child=Root.Source Files.Source Files\USB.usb\usb.c
-Next=Root.Source Files.usb\usb_desc.c
+Next=Root.Source Files.stm8_interrupt_vector.c
 
 [Root.Source Files.Source Files\USB.usb\usb.c]
 ElemType=File
@@ -327,14 +327,14 @@ Next=Root.Source Files.Source Files\USB.usb\usb_tx.s
 ElemType=File
 PathName=usb\usb_tx.s
 
-[Root.Source Files.usb\usb_desc.c]
-ElemType=File
-PathName=usb\usb_desc.c
-Next=Root.Source Files.stm8_interrupt_vector.c
-
 [Root.Source Files.stm8_interrupt_vector.c]
 ElemType=File
 PathName=stm8_interrupt_vector.c
+Next=Root.Source Files.usb_desc.c
+
+[Root.Source Files.usb_desc.c]
+ElemType=File
+PathName=usb_desc.c
 Next=Root.Source Files.hardware.c
 
 [Root.Source Files.hardware.c]
@@ -520,6 +520,11 @@ PathName=usb\usb.h
 [Root.Include Files.usb\usb_desc.h]
 ElemType=File
 PathName=usb\usb_desc.h
+Next=Root.Include Files.usb-config.h
+
+[Root.Include Files.usb-config.h]
+ElemType=File
+PathName=usb-config.h
 Next=Root.Include Files.stm8_interrupt_vector.h
 
 [Root.Include Files.stm8_interrupt_vector.h]

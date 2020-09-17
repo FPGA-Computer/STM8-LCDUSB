@@ -1,26 +1,16 @@
 #ifndef USB_H_
 #define USB_H_
 
-#include "usb_desc.h"
 #include "hardware.h"
+#include "usb-config.h"
+#include "usb_desc.h"
+
 //#include "usb def.h"
 
-/// SETTINGS ///////////////////////////////////////////////
-#define USB_MAX_NUM_CONFIGURATION 	1 // device configuration
-#define USB_MAX_NUM_INTERFACES 			1 // device interfaces
-#define USB_SELF_POWERED						0 // 0 - power from USB, 1 - dedicated power supply
-#define USB_CLOCK_HSI								1	// 0 - external frequency to 16 MHz (PA1, PA2); 1 - from the internal RC generator (HSI)
-#define USB_CONNECT_TIMEOUT					700 // connection timeout before reset // 100Hz * 7 sec = 700
-#define USB_RECONNECT_DELAY					100 // 100Hz * 1 sec = 100
 #define USB_PORT										GPIOC
 #define USB_DP											PC7
 #define USB_DM											PC6
-#define EEPROM_START_ADDR						0x4000 // EEPROM location where the HSI flask and HSITRIM value are written (2 bytes)
-#define MAGIC_VAL										0x11 // HSI setup flag. If the EEPROM contains a different value, the HSI setting will start at zero.
-#define USB_RESET_DELAY							2000	// time to detect "USB RESET" // 5-7ms
-//#define USB_EP_WATCHDOG_ENABLE			1 // when EP is unavailable
-#define USB_EP_WATCHDOG_TIMEOUT			300 // timeout 3 sec
-#define USB_EP_WATCHDOG_RECONNECT_DELAY	100 // Delay between switching off and on // 100Hz * 1 sec = 100
+
 ////////////////////////////////////////////////////////////
 
 #ifndef NULL
@@ -90,6 +80,11 @@ enum usb_packets_id_list
 #define  HID_REQ_GET_IDLE              									0x02
 #define  HID_REQ_SET_REPORT            									0x09
 #define  HID_REQ_GET_REPORT            									0x01
+
+// HID Class descriptors
+#define	 HID_DESCRIPTOR																	0x21
+#define	 HID_DESCRIPTOR_REPORT													0x22
+#define	 HID_DESCRIPTOR_PHYSICAL												0x23
 
 //HID Report Types
 #define  HID_REPORT_INPUT   														0x01
@@ -173,5 +168,9 @@ void USB_EP1_RxReady_callback(uint8_t *p_data, uint8_t length);
 int8_t USB_Setup_Request_callback(t_USB_SetupReq *p_req);
 int8_t USB_Class_Init_callback(uint8_t dev_config);
 int8_t USB_Class_DeInit_callback(void);
+
+// Make internal struct available for polling
+extern struct usb_type usb;
+#define USB_Tx_Ready(X)	(usb.EP[X].tx_state == USB_EP_NO_DATA)
 
 #endif /* USB_H_ */

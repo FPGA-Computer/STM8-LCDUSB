@@ -1,7 +1,8 @@
 	xref	_ll_usb_tx_count, _ll_usb_tx_buffer_pointer
-
 	xdef	_ll_usb_tx
+	
 ;;; 16 MHz ;;;
+
 L_Bit0_Idle:
 	dec		a		; a--
 	jrne	L_Bit1_Begin	; Jump if Z == 0; if a != 0
@@ -246,9 +247,43 @@ L_Bit7_Idle:
 ;
 _ll_usb_tx:
 
+	; consolidate common GPIO code here
+	
+	;GPIOC->ODR |= USB_DM; 									// set PC6
+	BSET  0x500a,#6
+
+	;GPIOC->CR1 |= USB_DP|USB_DM;
+	LD    A,0x500d
+	OR    A,#0xc0
+	LD    0x500d,A
+	;GPIOC->CR2 |= USB_DP|USB_DM; 						// PC6, PC7 - 10 MHz mode (external INTR enable)	
+	LD    A,0x500e
+	OR    A,#0xc0
+	LD    0x500e,A
+	;	GPIOC->DDR |= USB_DP|USB_DM; 						// PC6, PC7 - output mode
+	LD    A,0x500c 
+	OR    A,#0xc0 
+	LD    0x500c,A 
+	
 	ldw		x, _ll_usb_tx_buffer_pointer
 	
 	ld		a,#$40						; a = 0x40 (bit 6)
 	ld		20490,a						; GPIOC->ODR = a (set bit 6)
 	ld		a, #$06						; counter constant
-	jra		L_Bit0_Begin
+
+; Don't want to patch the exit point of Tx code and change the alignment 
+	;jra		L_Bit0_Begin
+	call	L_Bit0_Begin
+	
+	; move common GPIO code here
+	;GPIOC->CR2 &= (uint8_t)~(USB_DP|USB_DM);// PC6, PC7 - disable external INTR (2 MHz)
+	LD    A,0x500e
+	AND   A,#0x3f
+	LD    0x500e,A
+	;GPIOC->CR1 &= (uint8_t)~(USB_DP|USB_DM);// PC6, PC7 - disable PU (PP) mode
+	LD    A,0x500d
+	AND   A,#0x3f
+	LD    0x500d,A
+	;GPIOC->DDR = 0; 												// PC0..PC7 - input mode
+	CLR   0x500c
+	ret

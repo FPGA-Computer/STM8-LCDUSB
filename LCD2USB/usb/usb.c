@@ -17,7 +17,9 @@ extern void ll_usb_tx(void); // from usb_tx.s
 
 void USB_Reset(void)
 {
-	if (usb.dev_state == USB_STATE_CONFIGURED) USB_Class_DeInit_callback();
+	if (usb.dev_state == USB_STATE_CONFIGURED) 
+		USB_Class_DeInit_callback();
+		
 	usb.device_address = 0;
 	usb.setup_address  = 0;
 	usb.dev_state = USB_STATE_DEFAULT;
@@ -39,10 +41,12 @@ void USB_Init(void)
 {
 #if (USB_CLOCK_HSI == 1)
 	usb.delay_counter = 0;
+	
 	if (*p_HSI_TRIMING_DONE == MAGIC_VAL)
 		usb.trimming_stage = HSI_TRIMMER_DISABLE;
 	else
 		usb.trimming_stage = HSI_TRIMMER_ENABLE;
+		
 	usb.HSI_Trim_val = (uint8_t)(*p_HSI_TRIM_VAL & 0x0F);
 	CLK->HSITRIMR = (uint8_t)((CLK->HSITRIMR & (~0x0F)) | usb.HSI_Trim_val);
 #else
@@ -106,56 +110,30 @@ void USB_disconnect(void)
 	USB_PORT->DDR |= USB_DM;	
 }
 
+// consolidate common GPIO code for send in ll_usb_tx(); (usb_tx.S)
 @inline void usb_send_nack(void)
 {
 	const uint8_t data[2] = {USB_SYNC_BYTE, USB_PID_NACK};
 
-	GPIOC->ODR |= USB_DM; 									// set PC6
-	GPIOC->CR1 |= USB_DP|USB_DM; 						// PC6, PC7 - PP (PU) mode
-	GPIOC->CR2 |= USB_DP|USB_DM; 						// PC6, PC7 - 10 MHz mode (external INTR enable)
-	GPIOC->DDR |= USB_DP|USB_DM; 						// PC6, PC7 - output mode
-
 	ll_usb_tx_count = 2;
 	ll_usb_tx_buffer_pointer = data;
 	ll_usb_tx();
-
-	GPIOC->CR2 &= (uint8_t)~(USB_DP|USB_DM);// PC6, PC7 - disable external INTR (2 MHz)
-	GPIOC->CR1 &= (uint8_t)~(USB_DP|USB_DM);// PC6, PC7 - disable PU (PP) mode
-	GPIOC->DDR = 0; 												// PC0..PC7 - input mode
 }
 
 @inline void usb_send_ack(void)
 {
 	const uint8_t data[2] = {USB_SYNC_BYTE, USB_PID_ACK};
-
-	GPIOC->ODR |= USB_DM; 									// set PC6
-	GPIOC->CR1 |= USB_DP|USB_DM; 						// PC6, PC7 - PP (PU) mode
-	GPIOC->CR2 |= USB_DP|USB_DM; 						// PC6, PC7 - 10 MHz mode (external INTR enable)
-	GPIOC->DDR |= USB_DP|USB_DM; 						// PC6, PC7 - output mode
-
+	
 	ll_usb_tx_count = 2;
 	ll_usb_tx_buffer_pointer = data;
 	ll_usb_tx();
-
-	GPIOC->CR2 &= (uint8_t)~(USB_DP|USB_DM);// PC6, PC7 - disable external INTR (2 MHz)
-	GPIOC->CR1 &= (uint8_t)~(USB_DP|USB_DM);// PC6, PC7 - disable PU (PP) mode
-	GPIOC->DDR = 0; 												// PC0..PC7 - input mode
 }
 
 @inline void usb_send_packet(uint8_t EP_num)
 {
-	GPIOC->ODR |= USB_DM; 									// set PC6
-	GPIOC->CR1 |= USB_DP|USB_DM; 						// PC6, PC7 - PP (PU) mode
-	GPIOC->CR2 |= USB_DP|USB_DM; 						// PC6, PC7 - 10 MHz mode (external INTR enable)
-	GPIOC->DDR |= USB_DP|USB_DM; 						// PC6, PC7 - output mode
-
 	ll_usb_tx_count = usb.EP[EP_num].tx_length;
 	ll_usb_tx_buffer_pointer = usb.EP[EP_num].tx_buffer;
 	ll_usb_tx();
-
-	GPIOC->CR2 &= (uint8_t)~(USB_DP|USB_DM);// PC6, PC7 - disable external INTR (2 MHz)
-	GPIOC->CR1 &= (uint8_t)~(USB_DP|USB_DM);// PC6, PC7 - disable PU (PP) mode
-	GPIOC->DDR = 0; 												// PC0..PC7 - input mode
 }
 
 @inline void usb_copy_rx_packet(uint8_t EP_num)
@@ -170,7 +148,6 @@ void USB_disconnect(void)
 	usb.EP[EP_num].rx_buffer[7] = ll_usb_rx_buffer[9];
 	usb.EP[EP_num].rx_buffer[8] = ll_usb_rx_buffer[10];
 }
-
 
 void usb_rx_ok(void)
 {
@@ -261,10 +238,9 @@ void usb_rx_ok(void)
 void usb_calc_crc16(uint8_t * buffer, uint8_t length)
 {
 	uint16_t crc = 0xFFFF;
-	uint8_t index;
 	uint8_t i;
 
-	for (index = 0; index < length; index++)
+	for (;length;length--)
 	{
 		crc ^= *buffer++;
 
@@ -274,7 +250,9 @@ void usb_calc_crc16(uint8_t * buffer, uint8_t length)
 			{
 				crc >>= 1;
 				crc ^= 0xA001;
-			} else {
+			}
+			else
+			{
 				crc >>= 1;
 			}
 		}
@@ -333,7 +311,8 @@ int8_t USB_Send_Data(uint8_t * buffer, uint8_t length, uint8_t EP_num)
 			usb.EP[EP_num].tx_buffer[0] = USB_SYNC_BYTE;
 			usb.EP[EP_num].tx_buffer[1] = usb.EP[EP_num].tx_data_sync;
 			
-			if ((length == 8)&&(EP_num == 0)) flag = 1;	// If the length of last DATA packet is 8, then finialize the transaction by an empty packet
+			if ((length == 8)&&(EP_num == 0)) 
+				flag = 1;	// If the length of last DATA packet is 8, then finialize the transaction by an empty packet
 			
 			if (length > 8)
 			{
@@ -341,11 +320,16 @@ int8_t USB_Send_Data(uint8_t * buffer, uint8_t length, uint8_t EP_num)
 	
 				for (i = 2; i < 10; i++)
 					usb.EP[EP_num].tx_buffer[i] = *buffer++;
+					
 				length -= 8;
-			}	else {
+			}
+			else
+			{
 				usb.EP[EP_num].tx_length = (uint8_t)(4 + length);
+
 				for (i = 2; i < 2 + length; i++)
 					usb.EP[EP_num].tx_buffer[i] = *buffer++;
+					
 				length = 0;
 			}
 	
@@ -434,6 +418,7 @@ void USB_NRZI_RX_Decode(uint8_t *p_data, uint8_t length)
 			{
 				byte |= (uint8_t)(1 << j);
 				cnt++;
+				
 				if (cnt == 6)
 				{
 					offset++;
@@ -452,70 +437,40 @@ void USB_NRZI_RX_Decode(uint8_t *p_data, uint8_t length)
 void USB_Device_Request(t_USB_SetupReq *p_USB_SetupReq)
 {
 	switch (p_USB_SetupReq->bRequest)
-	{
-		case USB_REQ_GET_DESCRIPTOR: // GET_DESCRIPTOR
-		{
-			uint16_t wLength = (uint16_t)p_USB_SetupReq->wLength_LO | (uint16_t)((uint16_t)p_USB_SetupReq->wLength_HI << 8);
-			switch (p_USB_SetupReq->wValue_HI)
-			{
-				case USB_DESC_TYPE_DEVICE:	// Device desc
-					USB_Send_Data(usb_device_descriptor, 
-					(uint8_t)MIN(wLength, SIZE_DEVICE_DESCRIPTOR), 0);
-					break;
-
-				case USB_DESC_TYPE_CONFIGURATION:	// Configuration desc
-					USB_Send_Data(usb_configuration_descriptor, 
-						(uint8_t)MIN(wLength, SIZE_CONFIGURATION_DESCRIPTOR), 0);
-					break;
-
-				case USB_DESC_TYPE_STRING: // String desc
-					//if (p_USB_SetupReq->wValue_LO < LENGTH_STRING_DESCRIPTOR) {
-						USB_Send_Data(USB_String_Descriptors[p_USB_SetupReq->wValue_LO], 
-								(uint8_t)MIN(wLength, USB_String_Descriptors_Length[p_USB_SetupReq->wValue_LO]), 0);
-					//} else usb_control_error();
-					break;
-
-				default:
-					usb_control_error();
-					break;
-			}
-			break;
-		}
+	{			
 		case USB_REQ_SET_ADDRESS:	// SET_ADDRESS
-		{
-			if ((p_USB_SetupReq->wIndex_LO == 0) && (p_USB_SetupReq->wLength_LO == 0)) {
-				if (usb.dev_state == USB_STATE_CONFIGURED)
-				{
-					usb_control_error();
-				}
+		
+			if ((p_USB_SetupReq->wIndex_LO == 0) && 
+					(p_USB_SetupReq->wLength_LO == 0) &&
+					(usb.dev_state != USB_STATE_CONFIGURED))
+			{
+				usb.setup_address = (uint8_t)(p_USB_SetupReq->wValue_LO & 0x7F);
+				USB_Send_Data(NULL, 0, 0);
+				
+				if (usb.setup_address)
+					usb.dev_state  = USB_STATE_ADDRESSED;
 				else
-				{
-					usb.setup_address = (uint8_t)(p_USB_SetupReq->wValue_LO & 0x7F);
-					USB_Send_Data(NULL, 0, 0);
-					
-					if (usb.setup_address)
-						usb.dev_state  = USB_STATE_ADDRESSED;
-					else
-						usb.dev_state  = USB_STATE_DEFAULT; 
-				}
+					usb.dev_state  = USB_STATE_DEFAULT; 
 			}
 			else
 			{
 				usb_control_error();
 			}
+
 			break;
-		}
+			
 		case USB_REQ_SET_CONFIGURATION:	// SET_CONFIGURATION
-		{
 			if (p_USB_SetupReq->wValue_LO <= USB_MAX_NUM_CONFIGURATION)
 			{
 				switch (usb.dev_state)
 				{
 					case USB_STATE_ADDRESSED:
+					
 						if (p_USB_SetupReq->wValue_LO) 
 						{
 							usb.dev_config = p_USB_SetupReq->wValue_LO; // set new configuration
 							usb.dev_state = USB_STATE_CONFIGURED;
+							
 							if (USB_Class_Init_callback(usb.dev_config) < 0)
 								usb_control_error();
 							else
@@ -533,6 +488,7 @@ void USB_Device_Request(t_USB_SetupReq *p_USB_SetupReq)
 						break;
 						
 					case USB_STATE_CONFIGURED:
+					
 						if (p_USB_SetupReq->wValue_LO == 0) 
 						{
 							usb.dev_state = USB_STATE_ADDRESSED;
@@ -564,9 +520,8 @@ void USB_Device_Request(t_USB_SetupReq *p_USB_SetupReq)
 				usb_control_error();
 			}
 			break;
-		}
+
 		case USB_REQ_GET_CONFIGURATION: // GET_CONFIGURATION
-		{
 			if (p_USB_SetupReq->wLength_LO == 1) 
 			{
 				switch (usb.dev_state)  
@@ -582,10 +537,8 @@ void USB_Device_Request(t_USB_SetupReq *p_USB_SetupReq)
 				}
 			} else usb_control_error();
 			break;
-		}
 		
 		case USB_REQ_GET_STATUS: // GET_STATUS
-		{
 			switch (usb.dev_state) 
 			{
 				case USB_STATE_ADDRESSED:
@@ -597,6 +550,7 @@ void USB_Device_Request(t_USB_SetupReq *p_USB_SetupReq)
 					#endif
 					if (usb.dev_remote_wakeup)
 						usb.dev_config_status |= USB_CONFIG_REMOTE_WAKEUP;
+						
 					USB_Send_Data((uint8_t*)&usb.dev_config_status, 2, 0);
 					break;
 				
@@ -605,7 +559,9 @@ void USB_Device_Request(t_USB_SetupReq *p_USB_SetupReq)
 					break;
 			}
 			break;
-		}
+
+#ifdef USB_CFG_FEATURES_SUPPORT
+
 		case USB_REQ_SET_FEATURE: // SET_FEATURE
 			if (p_USB_SetupReq->wValue_LO == USB_FEATURE_REMOTE_WAKEUP)
 			{
@@ -616,7 +572,6 @@ void USB_Device_Request(t_USB_SetupReq *p_USB_SetupReq)
 			break;
 
 		case USB_REQ_CLEAR_FEATURE: // CLEAR_FEATURE
-		{
 			switch (usb.dev_state)
 			{
 				case USB_STATE_ADDRESSED:
@@ -634,7 +589,9 @@ void USB_Device_Request(t_USB_SetupReq *p_USB_SetupReq)
 					break;
 			}
 			break;
-		}
+			
+#endif
+
 		default:
 			usb_control_error();
 			break;
@@ -650,28 +607,18 @@ void USB_Handle_Standard_Request(t_USB_SetupReq *p_USB_SetupReq)
 			break;
 			
 		case USB_REQ_RECIPIENT_INTERFACE: // Interface request
-		{
-			if (usb.dev_state == USB_STATE_CONFIGURED)
-			{
-				if (p_USB_SetupReq->wIndex_LO <= USB_MAX_NUM_INTERFACES) 
-				{
-					if (USB_Setup_Request_callback(p_USB_SetupReq) < 0) 
-						usb_control_error();
-				}
-				else 
-					usb_control_error();
-			} 
-			else 
+			if ((usb.dev_state != USB_STATE_CONFIGURED)||
+				  (p_USB_SetupReq->wIndex_LO > USB_MAX_NUM_INTERFACES)||
+					(USB_Setup_Request_callback(p_USB_SetupReq)< 0)	)		// <--  Callback
 				usb_control_error();
 			break;
-		}
-		
+
+#ifdef USB_CFG_FEATURES_SUPPORT
+
 		case USB_REQ_RECIPIENT_ENDPOINT: // Endpoint request
-		{
-			switch (p_USB_SetupReq->bRequest) 
+
+			if(p_USB_SetupReq->bRequest==USB_REQ_CLEAR_FEATURE)
 			{
-				case USB_REQ_CLEAR_FEATURE:
-				{
 					switch (usb.dev_state) 
 					{
 						case USB_STATE_ADDRESSED:          
@@ -680,7 +627,9 @@ void USB_Handle_Standard_Request(t_USB_SetupReq *p_USB_SetupReq)
 							{
 								//USBD_LL_StallEP(pdev , p_USB_SetupReq->wIndex_LO);
 								USB_Send_Data(NULL, 0, 0);
-							} else usb_control_error();
+							} 
+							else 
+								usb_control_error();
 							break;	
 							
 						case USB_STATE_CONFIGURED:   
@@ -692,7 +641,9 @@ void USB_Handle_Standard_Request(t_USB_SetupReq *p_USB_SetupReq)
 									//USBD_LL_ClearStallEP(pdev , p_USB_SetupReq->wIndex_LO);
 									//USB_Setup_Request_callback(p_USB_SetupReq);
 									USB_Send_Data(NULL, 0, 0);
-								} else usb_control_error();
+								} 
+								else 
+									usb_control_error();
 							}
 							break;
 							
@@ -700,117 +651,60 @@ void USB_Handle_Standard_Request(t_USB_SetupReq *p_USB_SetupReq)
 							usb_control_error();
 							break;    
 					}
-					break;
-				}
-				
-				default:
-						usb_control_error();
-					break;
 			}
-			/* TODO!
-			switch (p_USB_SetupReq->bRequest) 
-			{
-				case USB_REQ_SET_FEATURE:
-				{
-					switch (usb.dev_state) 
-					{
-						case USBD_STATE_ADDRESSED:          
-							if ((p_req->wIndex_LO != 0x00) && (p_req->wIndex_LO != 0x80)) 
-							{
-								USBD_LL_StallEP(pdev , p_req->wIndex_LO);
-							}
-							break;	
-							
-						case USBD_STATE_CONFIGURED:   
-							if (p_USB_SetupReq->wValue_LO == USB_FEATURE_EP_HALT)
-							{
-								if ((p_USB_SetupReq->wIndex_LO != 0x00) && (p_USB_SetupReq->wIndex_LO != 0x80)) 
-								{ 
-									USBD_LL_StallEP(pdev , p_USB_SetupReq->wIndex_LO);
-								}
-							}
-							if (USB_Setup_Request_callback(p_USB_SetupReq) < 0) usb_control_error();
-							break;
-							
-						default:                         
-							usb_control_error();
-							break;    
-					}
-					break;
-				}
-					
-				case USB_REQ_CLEAR_FEATURE:
-				{
-					switch (usb.dev_state) 
-					{
-					case USBD_STATE_ADDRESSED:          
-						if ((p_USB_SetupReq->wIndex_LO != 0x00) && (p_USB_SetupReq->wIndex_LO != 0x80)) 
-						{
-							USBD_LL_StallEP(pdev , ep_addr);
-						}
-						break;	
-						
-					case USBD_STATE_CONFIGURED:   
-						if (req->wValue == USB_FEATURE_EP_HALT)
-						{
-							if ((p_USB_SetupReq->wIndex_LO & 0x7F) != 0x00) 
-							{        
-								USBD_LL_ClearStallEP(pdev , p_USB_SetupReq->wIndex_LO);
-								USB_Setup_Request_callback(p_USB_SetupReq);
-							}
-						}
-						break;
-						
-					default:                         
-						usb_control_error();
-						break;    
-					}
-					break;
-				}
-					
-				case USB_REQ_GET_STATUS:
-				{						
-					switch (pdev->dev_state) 
-					{
-					case USBD_STATE_ADDRESSED:          
-						if ((p_USB_SetupReq->wIndex_LO & 0x7F) != 0x00) 
-						{
-							USBD_LL_StallEP(pdev , p_USB_SetupReq->wIndex_LO);
-						}
-						break;	
-						
-					case USBD_STATE_CONFIGURED:
-						pep = ((p_USB_SetupReq->wIndex_LO & 0x80) == 0x80) ? &pdev->ep_in[p_USB_SetupReq->wIndex_LO & 0x7F]:\
-																							 &pdev->ep_out[p_USB_SetupReq->wIndex_LO & 0x7F];
-						if (USBD_LL_IsStallEP(pdev, ep_addr))
-						{
-							pep->status = 0x0001;     
-						}
-						else
-						{
-							pep->status = 0x0000;  
-						}
-						
-						USBD_CtlSendData (pdev, (uint8_t *)&pep->status, 2);
-						break;
-						
-					default:                         
-						usb_control_error();
-						break;
-					}
-					break;
-				}
-				default:
-					break;
-			}*/
+			else
+				usb_control_error();
+				
 			break;
-		}
-		
+			
+#endif
+
 		default:
 			usb_control_error();
 			break;
 	}
 }
+
+void USB_Handle_GetDescriptor(t_USB_SetupReq *p_USB_SetupReq)
+{
+	// USB_Send_Data() can only handle uint8_t for size WHY???
+	// uint16_t wLength = p_USB_SetupReq->wLength_LO|(p_USB_SetupReq->wLength_HI << 8);
+	
+	uint8_t wLength = p_USB_SetupReq->wLength_HI?0xff:p_USB_SetupReq->wLength_LO;
+
+	switch (p_USB_SetupReq->wValue_HI)
+	{
+		case USB_DESC_TYPE_DEVICE:	// Device desc
+			USB_Send_Data(usb_device_descriptor,MIN(wLength, SIZE_DEVICE_DESCRIPTOR),0);
+			break;
+
+		case USB_DESC_TYPE_CONFIGURATION:	// Configuration desc
+			USB_Send_Data(usb_configuration_descriptor,MIN(wLength, SIZE_CONFIGURATION_DESCRIPTOR),0);
+			break;
+
+		case USB_DESC_TYPE_STRING: // String desc
+			//if (p_USB_SetupReq->wValue_LO < LENGTH_STRING_DESCRIPTOR) {
+				USB_Send_Data(USB_String_Descriptors[p_USB_SetupReq->wValue_LO], 
+						MIN(wLength,USB_String_Descriptors_Length[p_USB_SetupReq->wValue_LO]),0);
+			//} else usb_control_error();
+			break;
+
+#ifdef USB_CFG_HID_DESCRIPTORS
+
+		case HID_DESCRIPTOR_REPORT: // handle HID class report descriptor
+			USB_Send_Data(HID_ReportDescriptor,MIN(wLength,SIZE_REPORT_DESCRIPTOR),0);
+			break;
+			
+		case HID_DESCRIPTOR:				// HID Descriptor
+			USB_Send_Data(USB_HID_descriptor,MIN(wLength,SIZE_HID_DESCRIPTOR),0);
+			break;	
+#endif
+
+		default:
+			usb_control_error();
+			break;
+	}
+}		
 
 void USB_loop(void)
 {
@@ -829,7 +723,12 @@ void USB_loop(void)
 			t_USB_SetupReq *p_USB_SetupReq = (t_USB_SetupReq*)(usb.EP[0].rx_buffer);
 
 			if((p_USB_SetupReq->bmRequest & USB_REQ_TYPE_MASK)==USB_REQ_TYPE_STANDARD)
-				USB_Handle_Standard_Request(p_USB_SetupReq);
+			{
+				if(p_USB_SetupReq->bRequest==USB_REQ_GET_DESCRIPTOR)	// GET_DESCRIPTOR			
+					USB_Handle_GetDescriptor(p_USB_SetupReq);
+				else
+					USB_Handle_Standard_Request(p_USB_SetupReq);
+			}
 			else
 				USB_Setup_Request_callback(p_USB_SetupReq);
 		

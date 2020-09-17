@@ -14,7 +14,7 @@ LCD2USB at https://github.com/harbaum/LCD2USB  (LCD2USB.dll)
 
 LCD Smarties at http://lcdsmartie.sourceforge.net/
 
-- USB stack logic is modified for this tech demo. Vendor Request packets (needed by LCD2USB) is working.  HID not tested yet.
+- USB stack logic is modified for this tech demo. Vendor Request packets (needed by LCD2USB) is working.  HID now tested (STM8 HID Dial).
 
 - Code reformatted/refractored.  Using my own IRQ files for STM8S003 for a much cleaner organization.  
 
@@ -51,3 +51,6 @@ Action|Menu (S1)| Inc (S2)|Dec (S3)
 Quick press|1|4|2
 Long Press|A|D|B
 
+V1.1
+
+- VUSB library is updated for HID.  Logic changes and more refractoring.  It is used in my other project: STM8 HID Dial.
