@@ -46,7 +46,7 @@ const unsigned char usb_configuration_descriptor[SIZE_CONFIGURATION_DESCRIPTOR] 
 	0x01, // Number of Endpoints used for this interface
 	0xff, // Class Code
 	0x00, // Subclass Code
-	0x00, // Protocol Code - keyboard
+	0x00, // Protocol Code
 	0x00, // Index of String Descriptor Describing this interface
 
 	// Endpoint descriptor

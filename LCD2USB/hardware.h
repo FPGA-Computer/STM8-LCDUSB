@@ -49,7 +49,7 @@ enum _PD { PD1=0x02, PD2=0x04, PD3=0x08, PD4=0x10, PD5=0x20, PD6=0x40 };
 #define LCD_BIAS_PIN		PA3
 
 enum _OPT2 { AFR0 = 0x01, AFR1=0x02, AFR2=0x04, AFR3=0x08, AFR4=0x10, AFR5=0x20, AFR6=0x40, AFR7 = 0x80 };
-#define OPTION_BYTE			AFR0
+enum _OPT3 { HSITRIM = 0x10, LSI_EN = 0x08, IWDG_HW = 0x04, WWDG_HW = 0x02, WWDG_HALT = 0x01 };
 
 #define TIM2_PRSC				4
 #define TIM2_FREQ				400
@@ -85,6 +85,8 @@ extern volatile uint8_t TIM2_Update_Flag;
 void Init_Hardware(void);
 void RESET_CHIP(void);
 void Check_OPTION_BYTE(void);
+void FLASH_Data_lock(uint8_t lock);
+void FLASH_Wait(void);
 void TIM2_Init(void);
 
 void LCD_Init(void);
